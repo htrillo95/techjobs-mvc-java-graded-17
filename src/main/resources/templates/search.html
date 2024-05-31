@@ -8,11 +8,14 @@
 
 <div class="container body-content">
 
+    <!-- Title -->
   <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
+    <!-- Search form -->
   <form th:action="@{/search/results}" method = "post">
     <h2>Search by:</h2>
 
+      <!-- Radio buttons for search type -->
     <p>
             <span th:each="column : ${columns}">
                 <input
@@ -26,17 +29,33 @@
 
     </p>
 
+      <!-- Input field for search term -->
     <p>
       <label for="searchTerm">Keyword:</label>
       <input type="text" name="searchTerm" id="searchTerm" />
     </p>
 
+      <!-- Submit button -->
     <input type="submit" value="Search" />
   </form>
 
   <hr />
 
   <!-- TODO #4 - Loop over the search results to display all job fields. -->
+                     <!-- TASK 4: DISPLAY SEARCH RESULTS -->
+
+    <div th:if="${jobs}">  <!-- if statement: if jobs are present -->
+        <h2>Search Results:</h2>
+        <table class="job-listing" th:each="job, tableIndex : ${jobs}" th:if="${tableIndex.index &lt; 4}">    <!-- Table for displaying search results -->
+            <tr th:each="row : ${rowLabels}">   <!-- Loop through each row label -->
+                <td th:text="${row.value}"></td>    <!-- Displays label in first column -->
+                <td th:text="${job[row.key]}"></td>    <!-- Displays job in second column -->
+            </tr>
+        </table>
+    </div>
+    <div th:unless="${jobs}">  <!-- Unless/If no jobs found -->
+        <p>No results found.</p>
+    </div>
 
 </div>
 
