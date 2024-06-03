@@ -18,10 +18,10 @@ import static org.launchcode.techjobsmvc.controllers.ListController.columnChoice
  * Created by LaunchCode
  */
 @Controller
-@RequestMapping("search")
+@RequestMapping("search") //maps requests with "search" to methods in this class
 public class SearchController {
 
-    @GetMapping(value = "")
+    @GetMapping(value = "") //method displays initial search form
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
         return "search";
@@ -29,13 +29,15 @@ public class SearchController {
 
     // TODO #3 - Create a handler to process a search request and render the updated search view.
     //TASK 3 BELOW
+                //method for search form/submission/display results
     @PostMapping(value = "results") //handles post request
     public String displaySearchResults(Model model, @RequestParam String searchType, //param 1
                                                     @RequestParam String searchTerm) //param 2
     {
-        ArrayList<Job> jobs;
-        if (searchType.equals("all") || searchTerm.isEmpty()) { //lists all or left empty depending on input
-            jobs = JobData.findAll(); //based on search type/term
+        ArrayList<Job> jobs; //list to store search results
+
+        if (searchTerm.toLowerCase().equals("all") || searchTerm.trim().isEmpty()) { //lists all or empty depending on input
+            jobs = JobData.findAll(); //jobs fetched based on search type/term
         } else {
             jobs = JobData.findByColumnAndValue(searchType, searchTerm); //else list based on search type/term
         }

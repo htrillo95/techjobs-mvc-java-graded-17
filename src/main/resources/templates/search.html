@@ -46,11 +46,32 @@
 
     <div th:if="${jobs}">  <!-- if statement: if jobs are present -->
         <h2>Search Results:</h2>
-        <table class="job-listing" th:each="job, tableIndex : ${jobs}" th:if="${tableIndex.index &lt; 4}">    <!-- Table for displaying search results -->
-            <tr th:each="row : ${rowLabels}">   <!-- Loop through each row label -->
-                <td th:text="${row.value}"></td>    <!-- Displays label in first column -->
-                <td th:text="${job[row.key]}"></td>    <!-- Displays job in second column -->
+        <table class="job-listing" th:each="job : ${jobs}">    <!-- Table for displaying search results -->
+            <tr>
+                <td>ID</td>
+                <td th:text="${job.id}"></td> <!-- ID -->
             </tr>
+            <tr>
+                <td>Name</td>
+                <td th:text="${job.name}"></td> <!-- NAME -->
+            </tr>
+            <tr>
+                <td>Employer</td>
+                <td th:text="${job.employer}"></td> <!-- EMPLOYER -->
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td th:text="${job.location}"></td> <!-- LOCATION -->
+            </tr>
+            <tr>
+                <td>Position Type</td>
+                <td th:text="${job.positionType}"></td> <!-- POSITION -->
+            </tr>
+            <tr>
+                <td>Skill</td>
+                <td th:text="${job.coreCompetency}"></td> <!-- CORE COMP -->
+            </tr>
+
         </table>
     </div>
     <div th:unless="${jobs}">  <!-- Unless/If no jobs found -->

@@ -17,19 +17,22 @@
       <th th:text = "${column.value}"></th>
     </th:block>
   </tr>
+
+  <!-- table row for category data -->
+
   <tr>
     <!-- TODO #2: Complete the View Jobs By Category Table. -->
 
-    <td> <!-- Feel free to remove or modify this element if necessary. -->
-                 <!-- VIEW ALL LINK BELOW -->
+    <!-- link to view all jobs -->
+    <td><a href="/list/jobs?column=all">View All</a></td>
 
-      <a th:href="@{/list/jobs(column='all', value='all')}" >View All</a>
-
-    </td>
-
+    <!-- loop through each category in "tableChoices" -->
     <td th:each="category : ${tableChoices}">
       <ul>
+        <!-- loops through each item in a category -->
         <li th:each="item : ${category.value}">
+
+          <!-- creates a link for each job item with URL params -->
           <a th:href="@{/list/jobs(column=${category.key},value=${item})}" th:text="${item}"></a>
         </li>
       </ul>
