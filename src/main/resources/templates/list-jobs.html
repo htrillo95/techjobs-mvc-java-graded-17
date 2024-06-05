@@ -13,7 +13,7 @@
   <!-- TODO #1 - Use a loop to display job results in a table. -->
               <!-- CORRECTED CODE-->
 
-  <div th:each="job : ${jobs}">
+  <th:block th:each="job : ${jobs}">
 
     <table class="job-listing">
       <tr>
@@ -41,7 +41,7 @@
         <td th:text="${job.coreCompetency}"></td>
       </tr>
     </table>
-  </div>
+  </th:block>
 
 
 </div>
